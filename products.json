@@ -3,12 +3,14 @@
         {
             "title": "product 1",
             "price": 10,
-            "description": "..."
+            "description": "...",
+            "image": "img/apple.jpg"
         },
         {
             "title": "product 2",
             "price": 15,
-            "description": "..."
+            "description": "...",
+            "image": "img/apple.jpg"  
         }
     ]
 }

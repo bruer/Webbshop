@@ -16,6 +16,7 @@ $(function(){
                 content += '<h2>' + products[i].title + '</h2>';
                 content += '<p>price: ' + products[i].price + '</p>';
                 content += '<p>' + products[i].description + '</p>';
+                content += '<img src="' + products[i].image + '">';
                 content += '</div>'
                 content += '<button id="buy-btn">buy</button>';
             }
