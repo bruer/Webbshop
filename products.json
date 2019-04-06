@@ -21,19 +21,19 @@
         {
             "title": "Smör",
             "price": 15,
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+            "description": "Aliquid tempore sequi, corporis impedit odio laudantium omnis nostrum deleniti, excepturi perspiciatis sapiente, perferendis consequatur ipsum a blanditiis repellat.",
             "image": "img/smor.png"
         },
         {
             "title": "Choklad",
             "price": 15,
-            "description": "Ut, nam voluptatum!",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
             "image": "img/tonys.png"
         },
         {
             "title": "Kaffe",
             "price": 15,
-            "description": "Aliquid tempore sequi, corporis impedit odio laudantium omnis nostrum deleniti, excepturi perspiciatis sapiente, perferendis consequatur ipsum a blanditiis repellat.",
+            "description": "Ut, nam voluptatum!",
             "image": "img/kaffe.png"
         },
         {
@@ -45,13 +45,13 @@
         {
             "title": "Grädde",
             "price": 15,
-            "description": "Ut, nam voluptatum!",
+            "description": "Aliquid tempore sequi, corporis impedit odio laudantium omnis nostrum deleniti, excepturi perspiciatis sapiente, perferendis consequatur ipsum a blanditiis repellat.",
             "image": "img/gradde.png"
         },
         {
             "title": "Mjöl",
             "price": 15,
-            "description": "Aliquid tempore sequi, corporis impedit odio laudantium omnis nostrum deleniti, excepturi perspiciatis sapiente, perferendis consequatur ipsum a blanditiis repellat.",
+            "description": "Ut, nam voluptatum!",
             "image": "img/mjol.png"
         },
         {
