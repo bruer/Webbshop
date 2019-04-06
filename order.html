@@ -5,32 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Webbshop</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <header>
-        <a href="products.html">products</a>
-        <a href="order.html">order</a>
+        <a href="products.html">Produkter</a>
+        <a href="order.html">Beställningssida</a>
     </header>
 
-    <div id="content">
-        <div id="container">
-            
-            <h1>order page</h1>
+    <main id="order-page">
 
-            <div id="chosen-product"></div>
+        <h1 id="order-text"></h1>
 
-            <form action="">
-                <label for="name">name</label><br>
-                <input type="text" id="name"><br>
-                <label for="phone">phone</label><br>
-                <input type="text" id="phone"><br>
-                <label for="email">email</label><br>
-                <input type="text" id="email"><br>
-                <label for="address">address</label><br>
-                <input type="text" id="address">
-            </form>
-        </div>
-    </div>
+        <div id="chosen-product"></div>
+
+        <form action="">
+            <label for="name">Namn</label>
+            <br>
+            <input type="text" 
+                   id="name"
+                   placeholder="för efter"
+                   required>
+            <br>
+            <label for="phone">Telefonnummer</label>
+            <br>
+            <input type="tel" 
+                   id="phone"
+                   placeholder="000 - 000 00 00"
+                   required>
+            <br>
+            <label for="email">Emailadress</label>
+            <br>
+            <input type="email" 
+                   id="email"
+                   placeholder="namn@mail.se"
+                   required>
+            <br>
+            <label for="address">Adress för leverans</label>
+            <br>
+            <input type="text" 
+                   id="address"
+                   placeholder="gatunamn husnummer"
+                   required>
+            <br>
+            <input type="submit" value="Beställ produkt">
+        </form>
+
+        <!-- <form action="">
+                <label for="name">Namn</label>
+                <br>
+                <input type="text" 
+                       id="name"
+                       placeholder="för efter">
+                <br>
+                <label for="phone">Telefonnummer</label>
+                <br>
+                <input type="tel" 
+                       id="phone"
+                       placeholder="000 - 000 00 00">
+                <br>
+                <label for="email">Emailadress</label>
+                <br>
+                <input type="email" 
+                       id="email"
+                       placeholder="namn@mail.se">
+                <br>
+                <label for="address">Adress för leverans</label>
+                <br>
+                <input type="text" 
+                       id="address"
+                       placeholder="gatunamn husnummer">
+                <br>
+                <input type="submit" value="Beställ produkt">
+            </form> -->
+    </main>
+
+    <footer>
+        <a href="products.json" target="_blank">JSON-filen</a>
+    </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="script.js"></script>

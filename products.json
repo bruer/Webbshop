@@ -4,61 +4,61 @@
             "title": "Äpple",
             "price": 10,
             "description": "...",
-            "image":"img/apple.png"
+            "image": "img/apple.png"
         },
         {
             "title": "Mjölk",
             "price": 15,
             "description": "...",
-            "image":"img/mjolk.png"
+            "image": "img/mjolk.png"
         },
         {
             "title": "Ägg",
             "price": 15,
             "description": "...",
-            "image":"img/agg.png"
+            "image": "img/agg.png"
         },
         {
             "title": "Smör",
             "price": 15,
             "description": "...",
-            "image":"img/smor.png"
+            "image": "img/smor.png"
         },
         {
             "title": "Choklad",
             "price": 15,
             "description": "...",
-            "image":"img/tonys.png"
+            "image": "img/tonys.png"
         },
         {
             "title": "Kaffe",
             "price": 15,
             "description": "...",
-            "image":"img/kaffe.png"
+            "image": "img/kaffe.png"
         },
         {
             "title": "Socker",
             "price": 15,
             "description": "...",
-            "image":"img/socker.png"
+            "image": "img/socker.png"
         },
         {
             "title": "Grädde",
             "price": 15,
             "description": "...",
-            "image":"img/gradde.png"
+            "image": "img/gradde.png"
         },
         {
             "title": "Mjöl",
             "price": 15,
             "description": "...",
-            "image":"img/mjol.png"
+            "image": "img/mjol.png"
         },
         {
             "title": "Bröd",
             "price": 15,
             "description": "...",
-            "image":"img/brod.png"
+            "image": "img/brod.png"
         }
     ]
 }

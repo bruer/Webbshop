@@ -1,13 +1,10 @@
 $(function(){
 
-    let products;
-
     function loadProducts(){
+
         $.getJSON('products.json').done(function(data){
             
-            console.log(data);
-            products = data['products'];
-            console.log(products);
+            let products = data['products'];
 
             let content = '';
 
@@ -16,54 +13,101 @@ $(function(){
                 content += '<div>';
                 content += '<h2>' + products[i].title + '</h2>';
                 content += '<img src="' + products[i].image + '">';
-                content += '<p>price: ' + products[i].price + '</p>';
+                content += '<p>' + products[i].price + ':-</p>';
                 content += '<p>' + products[i].description + '</p>';
-                content += '<button id="buy-btn">buy</button>';
-                content += '</div>'
+                content += '<button id="buy-btn">Köp</button>';
+                content += '</div>';
             }
             
             $('#products').html(content);
 
         }).fail(function(){
-            console.log('error');
+
+            console.log('cannot load JSON');
+
         });
     }
 
-    loadProducts();
+    function choseProduct(btn){
 
-    // $('#content').on('click', '#products-btn', function(){
+        let title = $(btn).parent().find('h2').html();
+        let image = $(btn).parent().find('img').attr('src');
         
-    //     $(this).remove();
+        localStorage.title = title;
+        localStorage.image = image;
+    }
 
-    //     let content = '';
+    function removeProduct(btn){
 
-    //     for(let i = 0; i < products.length; i++){
-                
-    //         content += '<div>';
-    //         content += '<h2>' + products[i].title + '</h2>';
-    //         content += '<p>price: ' + products[i].price + '</p>';
-    //         content += '<p>' + products[i].description + '</p>';
-    //         content += '</div>'
-    //         content += '<button id="buy-btn">buy</button>';
-    //     }
+        $(btn).parent().remove();
+        
+        $('#order-text').text('Du har inte valt något');
+        
+        localStorage.clear();
+    }
 
-    //     $('#products').html(content);
-    // });
+    function addProduct(){
 
-    let chosenProduct = '';
+        if(localStorage.length > 0){
 
-    $('#content').on('click', '#buy-btn', function(){
+            $('#order-text').text('Du har valt');
 
-        // if($('#chosen-product')[0].childElementCount <= 0){
-        //     $('#chosen-product').append($(this).prev().html());
-        // }
-        console.log($(this).siblings());
-        localStorage.chosenProduct = $(this).prev().html();
+            let chosenProduct =
+            '<div>' + 
+            '<h2>' + localStorage.title + '</h2>' + 
+            '<img src="' + localStorage.image + '">' +
+            '<button id="remove-btn">Ta bort</button>' +
+            '</div>';
+            
+            $('#chosen-product').append(chosenProduct);
+        }
+        else {
+
+            $('#order-text').text('Du har inte valt något');
+
+            $('#order-page').css('justify-content', 'center');
+        }
+    }
+
+    function submitOrder(){
+
+        if(localStorage.length > 0){
+
+            $('#order-page').html('<h1>Tack för din beställning</h1>');
+            
+            $('#order-page').css('justify-content', 'center');
+            
+            localStorage.clear();
+
+        }
+        else {
+            
+            // $('#order-text')
+            // .after('<p>Välj en produkt för att göra en beställning</p>');
+            alert('Välj en produkt för att göra en beställning');
+
+        }
+    }
+
+    $('form').on('submit', function(){
+        
+        submitOrder();
+
     });
 
-    localStorage.name = 'fred';
-    localStorage.age = '1';
-    
-    // console.log(localStorage.chosenProduct);
-    $('#chosen-product').append(localStorage.chosenProduct);
+    $('#products').on('click', '#buy-btn', function(){
+        
+        choseProduct(this);
+
+    });
+
+    $('#chosen-product').on('click', '#remove-btn', function(){
+        
+        removeProduct(this);
+
+    });
+
+    loadProducts();
+
+    addProduct();
 });
