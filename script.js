@@ -42,6 +42,8 @@ $(function(){
         $(btn).parent().remove();
         
         $('#order-text').text('Du har inte valt något');
+
+        $('#order-page').css('justify-content', 'center');
         
         localStorage.clear();
     }

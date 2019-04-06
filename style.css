@@ -32,6 +32,10 @@ main {
 }
 
 #products div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     width: 20em;
     margin: 10px;
     padding: 10px;
