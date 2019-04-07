@@ -8,15 +8,16 @@ $(function(){
 
             let content = '';
 
-            for(let i = 0; i < products.length; i++){
-                    
-                content += '<div>';
-                content += '<h2>' + products[i].title + '</h2>';
-                content += '<img src="' + products[i].image + '">';
-                content += '<p>' + products[i].price + ':-</p>';
-                content += '<p>' + products[i].description + '</p>';
-                content += '<button id="buy-btn">Köp</button>';
-                content += '</div>';
+            for(const product of products){
+
+                content += 
+                '<div>' + 
+                '<h2>' + product.title + '</h2>' + 
+                '<img src="' + product.image + '">' + 
+                '<p>' + product.price + ':-</p>' + 
+                '<p>' + product.description + '</p>' + 
+                '<button id="buy-btn">Köp</button>' + 
+                '</div>';
             }
             
             $('#products').html(content);
@@ -28,24 +29,23 @@ $(function(){
         });
     }
 
+    let products = 
+    localStorage.products ? JSON.parse(localStorage.products) : [];
+
     function choseProduct(btn){
 
-        let title = $(btn).parent().find('h2').html();
-        let image = $(btn).parent().find('img').attr('src');
-        
-        localStorage.title = title;
-        localStorage.image = image;
-    }
+        let productTitle = $(btn).parent().find('h2').html();
+        let productImage = $(btn).parent().find('img').attr('src');
 
-    function removeProduct(btn){
-
-        $(btn).parent().remove();
+        let product = {
+            title: productTitle,
+            image: productImage
+        }
         
-        $('#order-text').text('Du har inte valt något');
+        products.push(product);
+        console.log(products);
 
-        $('#order-page').css('justify-content', 'center');
-        
-        localStorage.clear();
+        localStorage.products = JSON.stringify(products);
     }
 
     function addProduct(){
@@ -54,19 +54,50 @@ $(function(){
 
             $('#order-text').text('Du har valt');
 
-            let chosenProduct =
-            '<div>' + 
-            '<h2>' + localStorage.title + '</h2>' + 
-            '<img src="' + localStorage.image + '">' +
-            '<button id="remove-btn">Ta bort</button>' +
-            '</div>';
+            for (const product of products){
+
+                localStorage.setItem(product.title, JSON.stringify(product));
+            }
+
+            localStorage.removeItem('products');
+
+            let content = '';
+
+            for (let i = 0; i < localStorage.length; i++) {
+
+                let product = 
+                JSON.parse(localStorage.getItem(localStorage.key(i)));
+
+                content +=
+                '<div id="' + product.title + '">' + 
+                '<h2>' + product.title + '</h2>' + 
+                '<img src="' + product.image + '">' +
+                '<button id="remove-btn">Ta bort</button>' +
+                '</div>';
+            }
             
-            $('#chosen-product').append(chosenProduct);
+            $('#chosen-product').append(content);
         }
         else {
 
             $('#order-text').text('Du har inte valt något');
 
+            $('#order-page').css('justify-content', 'center');
+        }
+    }
+
+    function removeProduct(btn){
+
+        localStorage.removeItem($(btn).parent().attr('id'));
+
+        $(btn).parent().remove();
+
+        console.log(localStorage.length);
+
+        if (localStorage.length <= 0) {
+            
+            $('#order-text').text('Du har inte valt något');
+            
             $('#order-page').css('justify-content', 'center');
         }
     }
@@ -112,4 +143,22 @@ $(function(){
     loadProducts();
 
     addProduct();
+
+    var getSandwich = function (useMayo) {
+        // var sandwich = 'peanut butter & jelly';
+        // if (useMayo) {
+        //     sandwich = 'turkey';
+        // }
+        let sandwich = useMayo ? 'a' : 'b';
+        return sandwich;
+    };
+    // console.log(getSandwich(1));
+
+    // let arr = ['a', 'b', 'c'];
+    // console.log(arr);
+    // localStorage.arr = arr;
+    // console.log(localStorage.arr);
+    // arr = arr.toString();
+    // console.log(arr.split());
+    // console.log(arr.split(','));
 });
