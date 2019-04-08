@@ -1,5 +1,8 @@
 $(function(){
 
+    let products = 
+    localStorage.products ? JSON.parse(localStorage.products) : [];
+
     function loadProducts(){
 
         $.getJSON('products.json').done(function(data){
@@ -14,8 +17,8 @@ $(function(){
                 '<div>' + 
                 '<h2>' + product.title + '</h2>' + 
                 '<img src="' + product.image + '">' + 
-                '<p>' + product.price + ':-</p>' + 
-                '<p>' + product.description + '</p>' + 
+                '<p id="price">' + product.price + ':-</p>' + 
+                '<p id="description">' + product.description + '</p>' +
                 '<button id="buy-btn">Köp</button>' + 
                 '</div>';
             }
@@ -29,17 +32,13 @@ $(function(){
         });
     }
 
-    let products = 
-    localStorage.products ? JSON.parse(localStorage.products) : [];
-
     function choseProduct(btn){
 
-        let productTitle = $(btn).parent().find('h2').html();
-        let productImage = $(btn).parent().find('img').attr('src');
-
         let product = {
-            title: productTitle,
-            image: productImage
+            
+            title: $(btn).parent().find('h2').html(),
+            image: $(btn).parent().find('img').attr('src'),
+            price: $(btn).parent().find('#price').html()
         }
         
         products.push(product);
@@ -50,6 +49,8 @@ $(function(){
 
     function addProduct(){
 
+        let content = '';
+        
         if(localStorage.length > 0){
 
             $('#order-text').text('Du har valt');
@@ -61,8 +62,6 @@ $(function(){
 
             localStorage.removeItem('products');
 
-            let content = '';
-
             for (let i = 0; i < localStorage.length; i++) {
 
                 let product = 
@@ -72,18 +71,43 @@ $(function(){
                 '<div id="' + product.title + '">' + 
                 '<h2>' + product.title + '</h2>' + 
                 '<img src="' + product.image + '">' +
+                '<input type="number" id="quantity" value="1">' +
+                '<p id="price">' + product.price + '</p>' +
+                '<p id="sum"></p>' +
                 '<button id="remove-btn">Ta bort</button>' +
                 '</div>';
             }
-            
-            $('#chosen-product').append(content);
+
+            content += '<button id="empty-cart-btn">töm varukorg</button>';
+
         }
         else {
 
-            $('#order-text').text('Du har inte valt något');
-
-            $('#order-page').css('justify-content', 'center');
+            message();
         }
+
+        $('#chosen-product').append(content);
+    }
+
+    // let sum = 0;
+
+    // function updateProduct(qnt){
+
+    //     let price = $(qnt).next();
+    //     console.log(price);
+    //     let n = Number(price.html().slice(0, -2));
+    //     console.log(n * qnt);
+    //     let sum = n;
+        
+    //     // let s = price.html();
+    //     // console.log(s);
+    //     // sum += n;
+    //     // console.log(sum);
+    //     // $(qnt).next().next().html(sum + ':-');
+    //     // price.next().html(sum + ':-');
+    // }
+
+    function updateProduct(qnt){
     }
 
     function removeProduct(btn){
@@ -92,19 +116,26 @@ $(function(){
 
         $(btn).parent().remove();
 
-        console.log(localStorage.length);
-
         if (localStorage.length <= 0) {
-            
-            $('#order-text').text('Du har inte valt något');
-            
-            $('#order-page').css('justify-content', 'center');
+
+            $('#empty-cart-btn').parent().remove();
+
+            message();
         }
+    }
+
+    function emptyCart(btn){
+
+        $(btn).parent().remove();
+        
+        localStorage.clear();
+        
+        message();
     }
 
     function submitOrder(){
 
-        if(localStorage.length > 0){
+        if (localStorage.length > 0){
 
             $('#order-page').html('<h1>Tack för din beställning</h1>');
             
@@ -121,6 +152,59 @@ $(function(){
 
         }
     }
+
+    function message(){
+
+        $('#order-text').text('Du har inte valt något');
+        $('#order-page').css('justify-content', 'center');
+    }
+
+    function validate(){
+
+        switch ($(this).attr('id')) {
+            case 'name':
+                console.log($(this).attr('id'));
+                
+                if (!$(this).val().includes(' ')){
+                    $(this).siblings('.message').show();
+                }
+                else {
+                    $(this).siblings('.message').hide();
+                }
+                break;
+
+            case 'phone':
+                // console.log(typeof $(this).val());
+                let condition = false;
+                for (const c of $(this).val()) {
+                    // console.log(isNaN(c));
+                    if (isNaN(c)){
+                        condition = true;
+                    }
+                }
+                console.log(condition);
+                if (condition){
+                    $(this).siblings('.message').show();
+                }
+                else {
+                    $(this).siblings('.message').hide();
+                }
+                break;
+
+            case 'email':
+                console.log($(this).attr('id'));
+                break;
+
+            case 'address':
+                console.log($(this).attr('id'));
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    $('input[required]').blur(validate);
 
     $('form').on('submit', function(){
         
@@ -140,25 +224,17 @@ $(function(){
 
     });
 
+    $('#chosen-product').on('click', '#quantity', function(){
+
+        // updateProduct(this);
+    });
+
+    $('#chosen-product').on('click', '#empty-cart-btn', function(){
+        
+        emptyCart(this);
+    })
+
     loadProducts();
 
     addProduct();
-
-    var getSandwich = function (useMayo) {
-        // var sandwich = 'peanut butter & jelly';
-        // if (useMayo) {
-        //     sandwich = 'turkey';
-        // }
-        let sandwich = useMayo ? 'a' : 'b';
-        return sandwich;
-    };
-    // console.log(getSandwich(1));
-
-    // let arr = ['a', 'b', 'c'];
-    // console.log(arr);
-    // localStorage.arr = arr;
-    // console.log(localStorage.arr);
-    // arr = arr.toString();
-    // console.log(arr.split());
-    // console.log(arr.split(','));
 });
