@@ -1,5 +1,10 @@
 $(function(){
 
+    let checkName = false, 
+        checkPhone = false, 
+        checkEmail = false, 
+        checkAddress = false;
+
     let products = 
     localStorage.products ? JSON.parse(localStorage.products) : [];
 
@@ -19,7 +24,9 @@ $(function(){
                 '<img src="' + product.image + '">' + 
                 '<p id="price">' + product.price + ':-</p>' + 
                 '<p id="description">' + product.description + '</p>' +
+                '<a href="order.html">' + 
                 '<button id="buy-btn">Köp</button>' + 
+                '</a>' +
                 '</div>';
             }
             
@@ -36,9 +43,9 @@ $(function(){
 
         let product = {
             
-            title: $(btn).parent().find('h2').html(),
-            image: $(btn).parent().find('img').attr('src'),
-            price: $(btn).parent().find('#price').html()
+            title: $(btn).closest('div').find('h2').html(),
+            image: $(btn).closest('div').find('img').attr('src'),
+            price: $(btn).closest('div').find('#price').html()
         }
         
         products.push(product);
@@ -80,13 +87,17 @@ $(function(){
 
             content += '<button id="empty-cart-btn">töm varukorg</button>';
 
+            $('form').show();
+
         }
         else {
 
             message();
+
         }
 
         $('#chosen-product').append(content);
+        
     }
 
     // let sum = 0;
@@ -118,6 +129,8 @@ $(function(){
 
         if (localStorage.length <= 0) {
 
+            $('form').hide();
+
             $('#empty-cart-btn').parent().remove();
 
             message();
@@ -125,6 +138,8 @@ $(function(){
     }
 
     function emptyCart(btn){
+
+        $('form').hide();
 
         $(btn).parent().remove();
         
@@ -135,7 +150,7 @@ $(function(){
 
     function submitOrder(){
 
-        if (localStorage.length > 0){
+        if (localStorage.length > 0 && validate()){
 
             $('#order-page').html('<h1>Tack för din beställning</h1>');
             
@@ -146,9 +161,10 @@ $(function(){
         }
         else {
             
-            // $('#order-text')
-            // .after('<p>Välj en produkt för att göra en beställning</p>');
-            alert('Välj en produkt för att göra en beställning');
+            $('input[type=submit]').after(
+            '<p id="order-btn-message">' +
+            'Fyll i samtliga fält för att göra en beställning' +
+            '</p>');
 
         }
     }
@@ -161,52 +177,116 @@ $(function(){
 
     function validate(){
 
+        let letters = /^[A-Öa-ö]+$/;
+        let numbers = /^[0-9]+$/;
+
         switch ($(this).attr('id')) {
+            
             case 'name':
-                console.log($(this).attr('id'));
                 
-                if (!$(this).val().includes(' ')){
-                    $(this).siblings('.message').show();
+                if ($(this).val().includes(' ') &&
+                    !$(this).val().startsWith(' ') &&
+                    !$(this).val().endsWith(' ')){
+
+                    checkName = true;
+
+                    $(this).siblings('.message').hide();
+
                 }
                 else {
-                    $(this).siblings('.message').hide();
+
+                    checkName = false;
+
+                    $(this).siblings('.message').show();
+
                 }
                 break;
 
             case 'phone':
-                // console.log(typeof $(this).val());
-                let condition = false;
-                for (const c of $(this).val()) {
-                    // console.log(isNaN(c));
-                    if (isNaN(c)){
-                        condition = true;
-                    }
-                }
-                console.log(condition);
-                if (condition){
-                    $(this).siblings('.message').show();
+
+                let number = $(this).val();
+
+                if (number.match(numbers) && number.length >= 6){
+
+                    checkPhone = true;
+
+                    $(this).siblings('.message').hide();
+
                 }
                 else {
-                    $(this).siblings('.message').hide();
+
+                    checkPhone = false;
+
+                    $(this).siblings('.message').show();
+
                 }
                 break;
 
             case 'email':
-                console.log($(this).attr('id'));
+
+                if ($(this).val().includes('@') &&
+                    !$(this).val().startsWith('@') &&
+                    !$(this).val().endsWith('@')){
+
+                    checkEmail = true;
+    
+                    $(this).siblings('.message').hide();
+
+                }
+                else {
+
+                    checkEmail = false;
+
+                    $(this).siblings('.message').show();
+
+                }
                 break;
 
             case 'address':
-                console.log($(this).attr('id'));
+                
+                if ($(this).val().includes(' ')){
+
+                    let street = $(this).val().split(' ')[0];
+                    let house = $(this).val().split(' ')[1];
+    
+                    if (street.match(letters) && house.match(numbers)){
+
+                        checkAddress = true;
+
+                        $(this).siblings('.message').hide();
+
+                    }
+                    else {
+
+                        checkAddress = false;
+
+                        $(this).siblings('.message').show();
+
+                    }
+                }
+
+                else {
+
+                    checkAddress = false;
+
+                    $(this).siblings('.message').show();
+
+                }
                 break;
 
             default:
                 break;
         }
+
+        return checkName && checkPhone && checkEmail && checkAddress;
+
     }
 
     $('input[required]').blur(validate);
 
-    $('form').on('submit', function(){
+    $('form').on('submit', function(e){
+
+        e.preventDefault();
         
         submitOrder();
 

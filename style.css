@@ -69,12 +69,16 @@ button, input[type=submit] {
 }
 
 #empty-cart-btn {
+    font-size: 15px;
     background-color: black;
+    align-self: flex-start;
 }
 
 input[type=submit] {
-    font-size: 15px;
-    background-color: black;
+    margin-top: 20px;
+    width: 75%;
+    /* font-size: 15px; */
+    background-color: blue;
 }
 
 form {
@@ -83,23 +87,41 @@ form {
     border-radius: 10px;
     margin: 25px;
     padding: 25px;
+
+    display: none;
 }
 
 form input {
     width: 100%;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     padding: 5px;
     border: none;
     border-radius: 5px;
     background-color: lightgray;
 }
 
-#order-text {
-    align-self: center;
+form div {
+    /* background-color: green; */
+    margin: 15px 0;
+    text-align: left;
 }
 
 .message {
+    /* background-color: black; */
+    margin: 5px;
     display: none;
+    font-size: 12px;
+    font-style: italic;
+    color: red;
+}
+
+#order-btn-message {
+    font-style: oblique;
+    color: red;
+}
+
+#order-text {
+    align-self: center;
 }
 
 header, footer {

@@ -37,7 +37,8 @@
                             placeholder="070 000 00 00"
                             required>
                      <p class="message">
-                            Telefonnummret får endast innehålla nummer
+                            Telefonnummret får endast innehålla nummer och
+                            måste vara minst 6 siffror långt
                      </p>
               </div>
               <div>
@@ -46,6 +47,10 @@
                             id="email"
                             placeholder="namn@mail.se"
                             required>
+                     <p class="message">
+                            Emailadressen måste innehålla ett '@'-tecken 
+                            samt något före och efter '@'-tecknet
+                     </p>
               </div>
               <div>
                      <label for="address">Adress för leverans</label>
@@ -53,8 +58,12 @@
                             id="address"
                             placeholder="gatunamn husnummer"
                             required>
+                     <p class="message">
+                            Leveransadressen måste innehålla gatunamn och 
+                            husnummer
+                     </p>
               </div>
-              <input type="submit" value="Beställ produkt">
+              <input type="submit" value="Gör beställning">
         </form>
 
         <!-- <form action="">
