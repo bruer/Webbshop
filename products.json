@@ -10,55 +10,55 @@
             "title": "Mjölk",
             "price": 15,
             "description": "Ut, nam voluptatum!",
-            "image": "img/mjolk.png"
+            "image": "img/milk.png"
         },
         {
             "title": "Ägg",
             "price": 15,
             "description": "Aliquid tempore sequi, corporis impedit odio laudantium omnis nostrum deleniti, excepturi perspiciatis sapiente, perferendis consequatur ipsum a blanditiis repellat.",
-            "image": "img/agg.png"
+            "image": "img/eggs.png"
         },
         {
             "title": "Smör",
             "price": 15,
             "description": "Aliquid tempore sequi, corporis impedit odio laudantium omnis nostrum deleniti, excepturi perspiciatis sapiente, perferendis consequatur ipsum a blanditiis repellat.",
-            "image": "img/smor.png"
+            "image": "img/butter.png"
         },
         {
             "title": "Choklad",
             "price": 15,
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-            "image": "img/tonys.png"
+            "image": "img/chocolate.png"
         },
         {
             "title": "Kaffe",
             "price": 15,
             "description": "Ut, nam voluptatum!",
-            "image": "img/kaffe.png"
+            "image": "img/coffee.png"
         },
         {
             "title": "Socker",
             "price": 15,
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-            "image": "img/socker.png"
+            "image": "img/sugar.png"
         },
         {
             "title": "Grädde",
             "price": 15,
             "description": "Aliquid tempore sequi, corporis impedit odio laudantium omnis nostrum deleniti, excepturi perspiciatis sapiente, perferendis consequatur ipsum a blanditiis repellat.",
-            "image": "img/gradde.png"
+            "image": "img/cream.png"
         },
         {
             "title": "Mjöl",
             "price": 15,
             "description": "Ut, nam voluptatum!",
-            "image": "img/mjol.png"
+            "image": "img/flour.png"
         },
         {
             "title": "Bröd",
             "price": 15,
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-            "image": "img/brod.png"
+            "image": "img/bread.png"
         }
     ]
 }
