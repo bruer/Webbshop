@@ -17,8 +17,6 @@
     <main id="order-page">
        <h1 id="order-text"></h1>
 
-        <div id="chosen-product"></div>
-
         <form novalidate action="">
               <div>
                      <label for="name">Namn</label>
@@ -34,11 +32,11 @@
                      <label for="phone">Telefonnummer</label>
                      <input type="tel" 
                             id="phone"
-                            placeholder="070 000 00 00"
+                            placeholder="00 00 00 / 000 000 00 00"
                             required>
                      <p class="message">
-                            Telefonnummret får endast innehålla nummer och
-                            måste vara minst 6 siffror långt
+                            Telefonnummret måste vara minst 6 tecken långt
+                            och får endast innehålla siffror
                      </p>
               </div>
               <div>
@@ -63,36 +61,14 @@
                             husnummer
                      </p>
               </div>
-              <input type="submit" value="Gör beställning">
+              <div>
+                     <input type="submit" id="order-btn" value="Gör beställning">
+                     <p class="message check-order">
+                            Fyll i samtliga fält för att göra en beställning
+                     </p>
+              </div>
         </form>
-
-        <!-- <form action="">
-                <label for="name">Namn</label>
-                <br>
-                <input type="text" 
-                       id="name"
-                       placeholder="för efter">
-                <br>
-                <label for="phone">Telefonnummer</label>
-                <br>
-                <input type="tel" 
-                       id="phone"
-                       placeholder="000 - 000 00 00">
-                <br>
-                <label for="email">Emailadress</label>
-                <br>
-                <input type="email" 
-                       id="email"
-                       placeholder="namn@mail.se">
-                <br>
-                <label for="address">Adress för leverans</label>
-                <br>
-                <input type="text" 
-                       id="address"
-                       placeholder="gatunamn husnummer">
-                <br>
-                <input type="submit" value="Beställ produkt">
-            </form> -->
+        
     </main>
 
     <footer>

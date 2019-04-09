@@ -19,7 +19,7 @@ $(function(){
             for(const product of products){
 
                 content += 
-                '<div>' + 
+                '<div class="product">' + 
                 '<h2>' + product.title + '</h2>' + 
                 '<img src="' + product.image + '">' + 
                 '<p id="price">' + product.price + ':-</p>' + 
@@ -34,7 +34,7 @@ $(function(){
 
         }).fail(function(){
 
-            console.log('cannot load JSON');
+            alert('cannot load JSON');
 
         });
     }
@@ -49,16 +49,19 @@ $(function(){
         }
         
         products.push(product);
-        console.log(products);
 
         localStorage.products = JSON.stringify(products);
     }
 
     function addProduct(){
 
-        let content = '';
+        let content = '<div id="basket">';
         
         if(localStorage.length > 0){
+
+            content += '<button id="empty-cart-btn">Töm varukorg</button>';
+            
+            content += '<div id="chosen-products">';
 
             $('#order-text').text('Du har valt');
 
@@ -75,7 +78,7 @@ $(function(){
                 JSON.parse(localStorage.getItem(localStorage.key(i)));
 
                 content +=
-                '<div id="' + product.title + '">' + 
+                '<div class="product" id="' + product.title + '">' + 
                 '<h2>' + product.title + '</h2>' + 
                 '<img src="' + product.image + '">' +
                 '<input type="number" id="quantity" value="1">' +
@@ -85,40 +88,20 @@ $(function(){
                 '</div>';
             }
 
-            content += '<button id="empty-cart-btn">töm varukorg</button>';
+            content += '</div></div>';
 
             $('form').show();
 
         }
         else {
 
-            message();
+            $('#order-text').text('Du har inte valt något');
+            $('#order-page').css('justify-content', 'center');
 
         }
 
-        $('#chosen-product').append(content);
+        $('#order-page').find('#order-text').after(content);
         
-    }
-
-    // let sum = 0;
-
-    // function updateProduct(qnt){
-
-    //     let price = $(qnt).next();
-    //     console.log(price);
-    //     let n = Number(price.html().slice(0, -2));
-    //     console.log(n * qnt);
-    //     let sum = n;
-        
-    //     // let s = price.html();
-    //     // console.log(s);
-    //     // sum += n;
-    //     // console.log(sum);
-    //     // $(qnt).next().next().html(sum + ':-');
-    //     // price.next().html(sum + ':-');
-    // }
-
-    function updateProduct(qnt){
     }
 
     function removeProduct(btn){
@@ -133,7 +116,8 @@ $(function(){
 
             $('#empty-cart-btn').parent().remove();
 
-            message();
+            $('#order-text').text('Du har inte valt något');
+            $('#order-page').css('justify-content', 'center');
         }
     }
 
@@ -145,12 +129,13 @@ $(function(){
         
         localStorage.clear();
         
-        message();
+        $('#order-text').text('Du har inte valt något');
+        $('#order-page').css('justify-content', 'center');
     }
 
     function submitOrder(){
 
-        if (localStorage.length > 0 && validate()){
+        if (validate()){
 
             $('#order-page').html('<h1>Tack för din beställning</h1>');
             
@@ -160,19 +145,10 @@ $(function(){
 
         }
         else {
-            
-            $('input[type=submit]').after(
-            '<p id="order-btn-message">' +
-            'Fyll i samtliga fält för att göra en beställning' +
-            '</p>');
+
+            $('#order-btn').siblings('.message').show();
 
         }
-    }
-
-    function message(){
-
-        $('#order-text').text('Du har inte valt något');
-        $('#order-page').css('justify-content', 'center');
     }
 
     function validate(){
@@ -298,18 +274,19 @@ $(function(){
 
     });
 
-    $('#chosen-product').on('click', '#remove-btn', function(){
+    $('#order-page').on('click', '#remove-btn', function(){
         
         removeProduct(this);
 
     });
 
-    $('#chosen-product').on('click', '#quantity', function(){
+    $('#order-page').on('click', '#quantity', function(){
 
         // updateProduct(this);
+
     });
 
-    $('#chosen-product').on('click', '#empty-cart-btn', function(){
+    $('#order-page ').on('click', '#empty-cart-btn', function(){
         
         emptyCart(this);
     })
