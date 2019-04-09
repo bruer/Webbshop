@@ -81,9 +81,9 @@ $(function(){
                 '<div class="product" id="' + product.title + '">' + 
                 '<h2>' + product.title + '</h2>' + 
                 '<img src="' + product.image + '">' +
-                '<input type="number" id="quantity" value="1">' +
+                // '<input type="number" id="quantity" value="1">' +
                 '<p id="price">' + product.price + '</p>' +
-                '<p id="sum"></p>' +
+                // '<p id="sum"></p>' +
                 '<button id="remove-btn">Ta bort</button>' +
                 '</div>';
             }
